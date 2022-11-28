@@ -1,10 +1,10 @@
 # ⭐️ Advent of ~~Code~~ LINQ 2022 ⭐️
 
-The [adventofcode.com](https://adventofcode.com/)] challenge for year 2022.
+The [adventofcode.com](https://adventofcode.com/) challenge for year 2022.
 
 Let's do this in [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/).
 
-> I know, I know - not everything can be solved by LINQ and not every solution is optimal when using LINQ. That being said, LINQ is fun!
+> I know, I know - not everything can be solved by LINQ and not every solution is optimal when using LINQ. That being said, LINQ is fun (I promise)!
 
 ## Requirements
 
@@ -16,7 +16,7 @@ Problems added as unit test classes in the project `.\src\AdventOfCode22Tests\Ad
 
 Problems will be identified by test classes corresponding on the days of the challenge (e.g. `Day1.cs` will represent the 1st of December challenge).
 
-To run the tests run the `dotnet test` command in the root of the repository.
+To run the tests, run the `dotnet test` command in the root of the repository.
 
 To run a specific subset of tests, run the following filtered command:
 
