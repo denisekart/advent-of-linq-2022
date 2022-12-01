@@ -1,7 +1,19 @@
-﻿namespace AdventOfCode22Tests;
+﻿using System.Text.RegularExpressions;
 
-public class Day1
+namespace AdventOfCode22Tests;
+
+public partial class Day1
 {
+    /// <summary>
+    /// Just to be absolutely clear - this is an overkill!
+    /// </summary>
+    /// <returns>A generated regular expression that will match at lease two consecutive newline characters with no significant characters in between</returns>
+    [GeneratedRegex("\\n\\s*\\n\\s*", RegexOptions.CultureInvariant)]
+    private static partial Regex TwoConsecutiveNewLines();
+
+    [GeneratedRegex("\\n\\s*", RegexOptions.CultureInvariant)]
+    private static partial Regex NewLine();
+
     [TestCase("""
         1000
         2000
@@ -17,19 +29,18 @@ public class Day1
         9000
 
         10000
-        """, ExpectedResult = 24000)]
-    public int Part1_ShouldReturnGroupWithMaxCaloriesWhenGivenAValidInputString(string input)
+        """)]
+    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-1-data.txt" })]
+    public void Part1_ShouldReturnGroupWithMaxCaloriesWhenGivenAValidInputString(string input)
     {
-        var maxCalories = input
-            .Split($"{Environment.NewLine}{Environment.NewLine}")
-            .Select(group => group.Split(Environment.NewLine))
+        var maxCalories = 
+            TwoConsecutiveNewLines().Split(input)
+            .Select(group => NewLine().Split(group))
             .Select(group => group.Select(item => item.ConvertToInteger()))
             .Select(group => group.Sum())
             .Max();
 
         Console.WriteLine($"Puzzle solution: {maxCalories}");
-
-        return maxCalories;
     }
 
     [TestCase("""
@@ -47,12 +58,13 @@ public class Day1
         9000
 
         10000
-        """, ExpectedResult = 45000)]
-    public int Part2_ShouldReturnSumOfTop3GroupsWithMostCaloriesWhenGivenAValidInputString(string input)
+        """)]
+    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-1-data.txt" })]
+    public void Part2_ShouldReturnSumOfTop3GroupsWithMostCaloriesWhenGivenAValidInputString(string input)
     {
-        var maxCalories = input
-            .Split($"{Environment.NewLine}{Environment.NewLine}")
-            .Select(group => group.Split(Environment.NewLine))
+        var maxCalories =
+            TwoConsecutiveNewLines().Split(input)
+            .Select(group => NewLine().Split(group))
             .Select(group => group.Select(item => item.ConvertToInteger()))
             .Select(group => group.Sum())
             .OrderByDescending(x => x)
@@ -60,7 +72,5 @@ public class Day1
             .Sum();
 
         Console.WriteLine($"Puzzle solution: {maxCalories}");
-
-        return maxCalories;
     }
 }
