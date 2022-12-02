@@ -83,7 +83,7 @@ Ok, here's how it works...
 
 > Btw, if you're stuck with the tool, just run `dotnet aoc --help` - I commented the sh...snow out of it ;)
 
-## 🎄🎄 Lazy² ? - `dotnet aoc makemyday` !
+## 🎄🎄 Lazy²? - `dotnet aoc makemyday` !
 
 Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the tool automatically 
 
