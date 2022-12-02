@@ -1,11 +1,37 @@
-﻿using AdventOfCode22Tests;
-using System.Net;
+﻿using System.Net;
 
 public static class AocTool
 {
+    public static DirectoryInfo? FindThisGitRepositoryRoot()
+    {
+        var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+        while (currentDirectory != null
+            && currentDirectory.Exists
+            && !currentDirectory.EnumerateDirectories(".git", SearchOption.TopDirectoryOnly).Any())
+        {
+            currentDirectory = currentDirectory.Parent;
+        }
+
+        return currentDirectory;
+    }
+
+    public static bool FileForDayExists(int day)
+    {
+        var repositoryRoot = FindThisGitRepositoryRoot();
+        var dataRoot = repositoryRoot?.EnumerateDirectories("data").FirstOrDefault();
+        if (dataRoot == null)
+        {
+            return false;
+        }
+        var file = Path.Combine(dataRoot.FullName, GetFilenameForDay(day));
+
+        return File.Exists(file);
+    }
+    public static string GetFilenameForDay(int day) => $"day-{day}-data.txt";
+
     public static void SetSessionInformation(string token)
     {
-        var root = Utilities.FindThisGitRepositoryRoot();
+        var root = FindThisGitRepositoryRoot();
         File.WriteAllText(Path.Combine(root!.FullName, "session"), token);
         Console.WriteLine("Session token set! -- by the way, don't ever commit this information ;) - put the session token location in .gitignore");
     }
@@ -25,7 +51,7 @@ public static class AocTool
 
     public static string? GetSessionToken()
     {
-        var root = Utilities.FindThisGitRepositoryRoot();
+        var root = FindThisGitRepositoryRoot();
         var sessionFile = root?.GetFiles("session", SearchOption.TopDirectoryOnly).FirstOrDefault();
         if (sessionFile == null || File.ReadAllText(sessionFile.FullName) is not string sessionToken || string.IsNullOrWhiteSpace(sessionToken))
         {
@@ -48,9 +74,9 @@ public static class AocTool
             throw new ArgumentNullException($"Session token is not set. Please provide a valid token using the 'session --set <token>' command.");
         }
 
-        if (Utilities.FileForDayExists(dayOfMonth))
+        if (FileForDayExists(dayOfMonth))
         {
-            throw new InvalidOperationException($"The data for day {dayOfMonth} (./data/{Utilities.GetFilenameForDay(dayOfMonth)}) already exists. Delete it if you wish to download the data again.");
+            throw new InvalidOperationException($"The data for day {dayOfMonth} (./data/{GetFilenameForDay(dayOfMonth)}) already exists. Delete it if you wish to download the data again.");
         }
 
         await LoadDataFromAOCWebsite(dayOfMonth, sessionToken);
@@ -90,13 +116,13 @@ public static class AocTool
     }
     public static async Task SaveDataForDay(int day, string data)
     {
-        var repositoryRoot = Utilities.FindThisGitRepositoryRoot();
+        var repositoryRoot = FindThisGitRepositoryRoot();
         var dataRoot = repositoryRoot?.EnumerateDirectories("data").FirstOrDefault();
         if (dataRoot == null)
         {
             dataRoot = Directory.CreateDirectory(Path.Combine(repositoryRoot!.FullName, "data"));
         }
-        var file = Path.Combine(dataRoot.FullName, Utilities.GetFilenameForDay(day));
+        var file = Path.Combine(dataRoot.FullName, GetFilenameForDay(day));
 
         await File.WriteAllTextAsync(file, data);
     }
@@ -116,7 +142,7 @@ public static class AocTool
     public static async Task GenerateTestClass(int dayOfMonth)
     {
         // yeah yeah, I'm cheating
-        var testClassesRoot = Utilities.FindThisGitRepositoryRoot()!.EnumerateFiles("Day0.cs", SearchOption.AllDirectories).FirstOrDefault()?.Directory;
+        var testClassesRoot = FindThisGitRepositoryRoot()!.EnumerateFiles("Day0.cs", SearchOption.AllDirectories).FirstOrDefault()?.Directory;
         if (testClassesRoot is null)
         {
             throw new InvalidOperationException("There was an error locating the test class directory. I swear there was a 'Day0.cs' file somewhere around here.");

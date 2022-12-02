@@ -8,19 +8,6 @@ public static class Utilities
     /// <param name="filename"></param>
     /// <returns></returns>
     public static IEnumerable<string> LoadTestData(string filename) => new[] {LoadData(filename)};
-    public static bool FileForDayExists(int day)
-    {
-        var repositoryRoot = Utilities.FindThisGitRepositoryRoot();
-        var dataRoot = repositoryRoot?.EnumerateDirectories("data").FirstOrDefault();
-        if (dataRoot == null)
-        {
-            return false;
-        }
-        var file = Path.Combine(dataRoot.FullName, Utilities.GetFilenameForDay(day));
-
-        return File.Exists(file);
-    }
-    public static string GetFilenameForDay(int day) => $"day-{day}-data.txt";
     
     /// <summary>
     /// Loads the data from the ./data folder using the filename

@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System.CommandLine;
+﻿using System.CommandLine;
 using static AocTool;
 
 var getSessionOption = new Option<bool?>(new[] { "--get", "-g" }, "Gets the current session information (reads the 'session' file in the repository root)");
