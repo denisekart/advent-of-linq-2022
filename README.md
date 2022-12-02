@@ -6,9 +6,14 @@ Let's do this in [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/programm
 
 > I know, I know - not everything can be solved by LINQ and not every solution is optimal when using LINQ. That being said, LINQ is fun (I promise)!
 
+*Notice*
+
+All code written for this years Advent of Code was synthesized by an organic inteligence (classification pending 🤣) called MyBrain™. I do not use intelligent coding assistants or tools to come up with the solutions for these challenges.
+
 ## 🎄🎄 Requirements
 
-`net7.0` is expected. Download the SDK [here](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
+* `net7.0` is expected. Download the SDK [here](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
+* that's it - you didn't expect `node` right?
 
 ## 🎄🎄 Outline
 
@@ -37,9 +42,28 @@ I'll commit sooner, everyone is doing it anyway.
 
 For more, follow me ...uhm... here, I guess.
 
+## 🎄🎄 Fun side project
+
+You can also have fun with the tool that lives in this repository called `aoc`. The tool source code is located in the `tools` folder and is installed in this repository as a dotnet tool.
+
+To use the tool, run the `dotnet tool restore` command once. After that, feel free to invoke the tool using the ˙dotnet aoc˙ command.
+
+You can of course start from scratch and install the tool where ever you want, just type in the following:
+
+```pwsh
+dotnet pack
+dotnet tool install --add-source .\tools\nupkg AocTool
+```
+
+(but, there's really no need)
+
+See the next sections on what this tool can do.
+
+> Note: If you do not wish to install the tool, commands `dotnet aoc` and `dotnet run --project .\tools --` are completely interchangeable so you can utilize the tool even when it's not installed - it's just a console application.
+
 ## 🎄🎄 Lazy?
 
-Yes! Head over to `tool/AocTool.csproj` to do the following awesome tasks:
+Yes! Head over to `tool/AocTool.csproj` (or install it using the hints from previous section) to do the following awesome tasks:
 
 * Download your personalized puzzle inputs automatically
 * Create pre-populated test classes for the current day
@@ -48,15 +72,19 @@ Yes! Head over to `tool/AocTool.csproj` to do the following awesome tasks:
 
 Ok, here's how it works...
 
-> Make sure you have a CLI tool open and are located in this repository root folder (the one that has .git folder in it)
+> Make sure you have a CLI open and are located in this repository root folder (the one that has .git folder in it)
 
 1. Make sure you're logged in to https://adventofcode.com
 2. Grab the session token (F12-developer tools -> application -> cookies -> https://adventofcode.com -> session -> [copy the value])
-3. Run `dotnet run --project .\tools -- session --set <token from step 2>` which will cache the token locally. Yay! You hacked the AOC (run). You only need to do this once per....idk...didn't bother to check.
-4. Run `dotnet run --project .\tools -- load` to download the puzzle data for the current day (or use the `--day` flag - if you're late or something). Check out the new `data` directory being created in the root of the repo.
-5. Run `dotnet run --project .\tools -- generate` to generate a test class for the current day(or use the `--day` ....yada yada...you know). Check out a brand new test class in your tests project.
+3. Run `dotnet aoc session --set <token from step 2>` which will cache the token locally. Yay! You hacked the AOC (run). You only need to do this once per....idk...didn't bother to check.
+4. Run `dotnet aoc load` to download the puzzle data for the current day (or use the `--day` flag - if you're late or something). Check out the new `data` directory being created in the root of the repo.
+5. Run `dotnet aoc generate` to generate a test class for the current day(or use the `--day` ....yada yada...you know). Check out a brand new test class in your tests project.
 6. That's the easy part... solve the puzzle!
 
-> Btw, if you're stuck with the tool, just run `dotnet run --project .\tools -- --help` - I commented the sh...snow out of it ;)
+> Btw, if you're stuck with the tool, just run `dotnet aoc --help` - I commented the sh...snow out of it ;)
+
+## 🎄🎄 Lazy² - `dotnet aoc makemyday`?
+
+Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the show.
 
 🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄

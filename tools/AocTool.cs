@@ -40,20 +40,17 @@ public static class AocTool
 
         if (!isValidDay)
         {
-            Console.Error.WriteLine($"The day {dayOfMonth} is not a valid day. The day was specified {(isDaySpecified ? "manually using the command line option" : "automatically using the current day of month")}");
-            throw new ArgumentException();
+            throw new ArgumentException($"The day {dayOfMonth} is not a valid day. The day was specified {(isDaySpecified ? "manually using the command line option" : "automatically using the current day of month")}");
         }
 
         if (GetSessionToken() is not string sessionToken)
         {
-            Console.Error.WriteLine($"Session token is not set. Please provide a valid token using the 'session --set <token>' command.");
-            throw new ArgumentNullException();
+            throw new ArgumentNullException($"Session token is not set. Please provide a valid token using the 'session --set <token>' command.");
         }
 
         if (Utilities.FileForDayExists(dayOfMonth))
         {
-            Console.Error.WriteLine($"The for day {dayOfMonth} ({Utilities.GetFilenameForDay(dayOfMonth)}) already exists. Delete it if you wish to download the data again.");
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"The data for day {dayOfMonth} (./data/{Utilities.GetFilenameForDay(dayOfMonth)}) already exists. Delete it if you wish to download the data again.");
         }
 
         await LoadDataFromAOCWebsite(dayOfMonth, sessionToken);
@@ -65,6 +62,7 @@ public static class AocTool
 
         var baseAddress = new Uri("https://adventofcode.com");
         var inputUrl = $"/2022/day/{dayOfMonth}/input";
+
         Console.WriteLine($"Requesting data from {baseAddress}{inputUrl}");
 
         var cookieContainer = new CookieContainer();
@@ -87,7 +85,7 @@ public static class AocTool
         else
         {
             Console.Error.WriteLine("There was en error during data transfer. You should consider invalidating your session token.");
-            result.EnsureSuccessStatusCode();
+            result.EnsureSuccessStatusCode(); // error will be thrown and handled here
         }
     }
     public static async Task SaveDataForDay(int day, string data)
@@ -121,16 +119,14 @@ public static class AocTool
         var testClassesRoot = Utilities.FindThisGitRepositoryRoot()!.EnumerateFiles("Day0.cs", SearchOption.AllDirectories).FirstOrDefault()?.Directory;
         if (testClassesRoot is null)
         {
-            Console.Error.WriteLine("There was an error locating the test class directory. I swear there was a 'Day0.cs' file somewhere around here.");
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("There was an error locating the test class directory. I swear there was a 'Day0.cs' file somewhere around here.");
         }
 
         var filename = $"Day{dayOfMonth}.cs";
 
         if (testClassesRoot.EnumerateFiles(filename, SearchOption.TopDirectoryOnly).FirstOrDefault() is not null)
         {
-            Console.Error.WriteLine($"The test class named {filename} already exists. I shall not destroy data! Abort, abort!");
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"The test class named {filename} already exists. I shall not destroy data! Abort, abort!");
         }
 
         var classContent = GenerateTestClassContent(dayOfMonth);
