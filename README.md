@@ -85,9 +85,9 @@ Ok, here's how it works...
 
 ## 🎄🎄 Lazy²? - `dotnet aoc makemyday` !
 
-Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the tool automatically 
+Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the tool automatically: 
 
-* creat a new test class for the current day, 
+* create a new test class for the current day, 
 * download your personal data set required for the current day challenge,
 * link your test data to the newly created test class (ready to run),
 * provide you with a website link for the current challenge,
