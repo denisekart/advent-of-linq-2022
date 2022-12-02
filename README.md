@@ -6,9 +6,9 @@ Let's do this in [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/programm
 
 > I know, I know - not everything can be solved by LINQ and not every solution is optimal when using LINQ. That being said, LINQ is fun (I promise)!
 
-*Notice*
+**Notice*:*
 
-All code written for this years Advent of Code was synthesized by an organic inteligence (classification pending 🤣) called MyBrain™. I do not use intelligent coding assistants or tools to come up with the solutions for these challenges.
+All code written for this years' Advent of Code was synthesized by an organic intelligence (classification pending 😆) called MyBrain™. I do not use intelligent coding assistants or tools to come up with these solutions.
 
 ## 🎄🎄 Requirements
 
@@ -46,7 +46,7 @@ For more, follow me ...uhm... here, I guess.
 
 You can also have fun with the tool that lives in this repository called `aoc`. The tool source code is located in the `tools` folder and is installed in this repository as a dotnet tool.
 
-To use the tool, run the `dotnet tool restore` command once. After that, feel free to invoke the tool using the ˙dotnet aoc˙ command.
+To use the tool, run the `dotnet tool restore` command once. After that, feel free to invoke the tool using the `dotnet aoc` command.
 
 You can of course start from scratch and install the tool where ever you want, just type in the following:
 
@@ -59,7 +59,7 @@ dotnet tool install --add-source .\tools\nupkg AocTool
 
 See the next sections on what this tool can do.
 
-> Note: If you do not wish to install the tool, commands `dotnet aoc` and `dotnet run --project .\tools --` are completely interchangeable so you can utilize the tool even when it's not installed - it's just a console application.
+> Note: If you do not wish to install the tool, commands `dotnet aoc` and `dotnet run --project .\tools --` are completely interchangeable so you can utilize the tool even when it's not installed - it's just a console application (`dotnet run --project .\tools -- --help` === `dotnet aoc --help`).
 
 ## 🎄🎄 Lazy?
 
@@ -83,8 +83,13 @@ Ok, here's how it works...
 
 > Btw, if you're stuck with the tool, just run `dotnet aoc --help` - I commented the sh...snow out of it ;)
 
-## 🎄🎄 Lazy² - `dotnet aoc makemyday`?
+## 🎄🎄 Lazy² ? - `dotnet aoc makemyday` !
 
-Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the show.
+Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the tool automatically 
+
+* creating a new test class for the current day, 
+* downloading your personal data set required for the current days' challenge,
+* linking your test data to the newly created test,
+* ~~and bringing you a cup of freshly brewed coffee.~~ (still in alpha stage - do not use, may spill some on the keyboard)
 
 🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄
