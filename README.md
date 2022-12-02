@@ -2,13 +2,13 @@
 
 The [adventofcode.com](https://adventofcode.com/) challenge for year 2022.
 
-Let's do this in [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/).
+Let's do this in [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) this year.
 
 > I know, I know - not everything can be solved by LINQ and not every solution is optimal when using LINQ. That being said, LINQ is fun (I promise)!
 
-**Notice*:*
+**Notice:**
 
-All code written for this years' Advent of Code was synthesized by an organic intelligence (classification pending 😆) called MyBrain™. I do not use intelligent coding assistants or tools to come up with these solutions.
+All code written for this years' Advent of Code was synthesized by an organic intelligence (classification pending 😆) called MyBrain™. I do not use intelligent coding assistants or other types of tools to come up with these solutions.
 
 ## 🎄🎄 Requirements
 
@@ -87,9 +87,10 @@ Ok, here's how it works...
 
 Assuming you are already logged in using the `dotnet aoc session --set <token>`, just type `dotnet aoc makemyday` and enjoy the tool automatically 
 
-* creating a new test class for the current day, 
-* downloading your personal data set required for the current days' challenge,
-* linking your test data to the newly created test,
-* ~~and bringing you a cup of freshly brewed coffee.~~ (still in alpha stage - do not use, may spill some on the keyboard)
+* creat a new test class for the current day, 
+* download your personal data set required for the current day challenge,
+* link your test data to the newly created test class (ready to run),
+* provide you with a website link for the current challenge,
+* ~~and bring you a cup of freshly brewed coffee.~~ (alpha - donation required LOL)
 
 🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄
