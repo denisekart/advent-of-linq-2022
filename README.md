@@ -93,4 +93,6 @@ Assuming you are already logged in using the `dotnet aoc session --set <token>`,
 * provide you with a website link for the current challenge,
 * ~~and bring you a cup of freshly brewed coffee.~~ (alpha - donation required LOL)
 
+![](makemyday.gif)
+
 🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄
