@@ -57,8 +57,8 @@ makeMyDayCommand.SetHandler(async day =>
         ConsoleWrappers.FailAndExit($"The provided day is not valid. Expected a day between 1 and 25, got {dayOfMonth}. (Fun fact, you can only implicitly determine the day between 1st and 25th in a month)");
     }
 
-    await LoadDataForDay(day).AndTreatErrorsAsWarnings(successMessage: "Data for day {dayOfMonth} downloaded");
-    await GenerateTestClass(dayOfMonth).AndTreatErrorsAsWarnings(successMessage: "Test class for day {dayOfMonth} generated");
+    await LoadDataForDay(day).AndTreatErrorsAsWarnings(successMessage: $"Data for day {dayOfMonth} downloaded");
+    await GenerateTestClass(dayOfMonth).AndTreatErrorsAsWarnings(successMessage: $"Test class for day {dayOfMonth} generated");
     $"Now go to https://adventofcode.com/2022/day/{dayOfMonth} and start reading!".GoodDeveloper();
 
     ConsoleWrappers.SucceedAndExit("All is good in the world");
