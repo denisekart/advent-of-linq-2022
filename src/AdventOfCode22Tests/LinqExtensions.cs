@@ -71,5 +71,18 @@ public static class LinqExtensions
 
             items.Add(item);
         }
+        if (items.Any())
+            yield return items.ToArray();
+    }
+
+    /// <summary>
+    /// I'm gonna make LINQ work, even if santa thinks I'm a bad boy!
+    /// </summary>
+    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+    {
+        foreach(var item in enumerable)
+        {
+            action(item);
+        }
     }
 }

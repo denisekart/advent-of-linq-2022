@@ -33,7 +33,7 @@ public class Day4
     public void Part1_ShouldReturnValidSolution(string input)
     {
         var solution = input
-            .Split("\n", StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries)
+            .SplitByLines(trim: true, removeEmptyLines: true)
             .Select(l => l.Split(",", StringSplitOptions.TrimEntries))
             .Select(l => (left: Expand(l[0]), right: Expand(l[1])))
             .Select(x => (x.left, x.right, intersection: x.left.Intersect(x.right).ToArray()))
@@ -55,7 +55,7 @@ public class Day4
     public void Part2_ShouldReturnValidSolution(string input)
     {
         var solution = input
-            .Split("\n", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .SplitByLines(trim: true, removeEmptyLines: true)
             .Select(l => l.Split(",", StringSplitOptions.TrimEntries))
             .Select(l => (left: Expand(l[0]), right: Expand(l[1])))
             .Select(x => (x.left, x.right, intersection: x.left.Intersect(x.right).ToArray()))
