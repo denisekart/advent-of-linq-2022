@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text;
 
 public static class AocTool
 {
@@ -27,6 +28,7 @@ public static class AocTool
 
         return File.Exists(file);
     }
+
     public static string GetFilenameForDay(int day) => $"day-{day}-data.txt";
 
     public static void SetSessionInformation(string token)
@@ -114,6 +116,7 @@ public static class AocTool
             result.EnsureSuccessStatusCode(); // error will be thrown and handled here
         }
     }
+
     public static async Task SaveDataForDay(int day, string data)
     {
         var repositoryRoot = FindThisGitRepositoryRoot();
@@ -160,6 +163,26 @@ public static class AocTool
         await File.WriteAllTextAsync(Path.Combine(testClassesRoot.FullName, filename), classContent);
     }
 
+    public static async Task GenerateBenchmarkClass(int dayOfMonth)
+    {
+        var testClassesRoot = FindThisGitRepositoryRoot()!.EnumerateFiles("Benchmarks.csproj", SearchOption.AllDirectories).FirstOrDefault()?.Directory;
+        if (testClassesRoot is null)
+        {
+            throw new InvalidOperationException("There was an error locating the benchmark class directory. I swear there was a 'Benchmarks.csproj' file somewhere around here.");
+        }
+
+        var filename = $"Day{dayOfMonth}.cs";
+
+        if (testClassesRoot.EnumerateFiles(filename, SearchOption.TopDirectoryOnly).FirstOrDefault() is not null)
+        {
+            throw new InvalidOperationException($"The benchmark class named {filename} already exists. I shall not destroy data! Abort, abort!");
+        }
+
+        var classContent = GenerateBenchmarkClassContent(dayOfMonth);
+
+        await File.WriteAllTextAsync(Path.Combine(testClassesRoot.FullName, filename), classContent);
+    }
+
     public static string GenerateTestClassContent(int dayOfMonth)
     {
         var content = $$""""
@@ -169,7 +192,8 @@ public static class AocTool
         /// dotnet run --project .\tools -- --help
         /// 
         /// Happy coding!
-
+        
+        using System.Diagnostics;
         namespace AdventOfCode22Tests;
 
         /// <summary>
@@ -203,5 +227,109 @@ public static class AocTool
         """";
 
         return content;
+    }
+
+    public static string GenerateBenchmarkClassContent(int dayOfMonth) => $$"""
+        /// This file was generated automatically by a tool.
+        /// Really! I'm not joking, it's awesome! Try it out!
+        /// dotnet run --project .\tools -- --help
+        /// 
+        /// Happy coding!
+        
+        using BenchmarkDotNet.Attributes;
+
+        public class Day{{dayOfMonth}}
+        {
+            private string data = null!;
+            Action<string>
+                part1 = null!,
+                part2 = null!;
+
+            [GlobalSetup]
+            public void GlobalSetup()
+            {
+                data = DataExtensions.GetDataForDay({{dayOfMonth}}) ?? throw new ArgumentNullException(nameof(data));
+
+                var testClass = new AdventOfCode22Tests.Day{{dayOfMonth}}();
+                part1 = testClass.Part1_ShouldReturnValidSolution;
+                part2 = testClass.Part2_ShouldReturnValidSolution;
+            }
+
+            [Benchmark]
+            public void Benchmark_Part1()
+            {
+                part1(data);
+            }
+
+            [Benchmark]
+            public void Benchmark_Part2()
+            {
+                part2(data);
+            }
+        }
+        
+        """;
+    public static void CleanBenchmarkResults()
+    {
+        var all = FindThisGitRepositoryRoot()!.EnumerateDirectories("BenchmarkDotNet.Artifacts", SearchOption.AllDirectories).ToList();
+        all.ForEach(dir => Directory.Delete(dir.FullName, true));
+    }
+
+    public static string? GetSanitizedBenchmarkResults()
+    {
+        var dir = FindThisGitRepositoryRoot()!.EnumerateDirectories("BenchmarkDotNet.Artifacts", SearchOption.AllDirectories).Single();
+        var results = dir
+            .GetDirectories()
+            .First(d => d.Name == "results")
+            .EnumerateFiles("*-github.md", SearchOption.TopDirectoryOnly)
+            .OrderBy(x => x.Name)
+            .Select(f => new {
+                name= f.Name, 
+                day=int.TryParse(
+                    new string(f.Name.Skip(3).TakeWhile(c => char.IsDigit(c)).ToArray()),
+                    out var day) ? day : 0, 
+                content=File.ReadAllText(f.FullName) })
+            .ToList();
+
+        StringBuilder sb = new StringBuilder();
+        bool isFirst = true;
+        foreach (var day in results)
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+                var env = new string(day.content.TakeWhile(c => c != '|').ToArray());
+                sb.AppendLine(env);
+                sb.AppendLine();
+            }
+
+            sb.AppendLine($"### Results for day {day.day}");
+            sb.AppendLine();
+            sb.AppendLine(new string(day.content.SkipWhile(x => x != '|').ToArray()));
+        }
+
+        return sb.ToString();
+    }
+
+    public static string GetUpdatedReadmeContent(string benchmarks)
+    {
+        var readme = File.ReadAllText(FindThisGitRepositoryRoot().EnumerateFiles("README.md").Single().FullName);
+        var before = readme.Split("## Benchmarks")[0];
+        var after = readme.Split("<!-- end benchmarks -->")[1];
+
+        return $$"""
+            {{before}}
+            ## Benchmarks
+
+            {{benchmarks}}
+            <!-- end benchmarks -->
+            {{after}}
+            """;
+    }
+
+    public static void UpdateReadmeWithNewContent(string content)
+    {
+        var readme = FindThisGitRepositoryRoot().EnumerateFiles("README.md").Single();
+        File.WriteAllText(readme.FullName, content);
     }
 }

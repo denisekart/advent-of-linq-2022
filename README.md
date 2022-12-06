@@ -61,6 +61,12 @@ See the next sections on what this tool can do.
 
 > Note: If you do not wish to install the tool, commands `dotnet aoc` and `dotnet run --project .\tools --` are completely interchangeable so you can utilize the tool even when it's not installed - it's just a console application (`dotnet run --project .\tools -- --help` === `dotnet aoc --help`).
 
+**Note to self (you're going to forget anyway):** this is how you update the tool locally after developing new feature:
+
+* update version in AocTool.csproj
+* run `dotnet pack`
+* run `dotnet tool update --add-source .\tools\nupkg AocTool`
+
 ## 🎄🎄 Lazy?
 
 Yes! Head over to `tool/AocTool.csproj` (or install it using the hints from previous section) to do the following awesome tasks:
@@ -90,9 +96,73 @@ Assuming you are already logged in using the `dotnet aoc session --set <token>`,
 * create a new test class for the current day, 
 * download your personal data set required for the current day challenge,
 * link your test data to the newly created test class (ready to run),
+* create a benchmark suite already linked to the downloaded test data (ready to run)
 * provide you with a website link for the current challenge,
 * ~~and bring you a cup of freshly brewed coffee.~~ (alpha - donation required LOL)
 
 ![](makemyday.gif)
+
+
+
+## Benchmarks
+
+``` ini
+
+BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.1098/21H2)
+Intel Core i7-10750H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
+.NET SDK=7.0.100
+  [Host]     : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
+  DefaultJob : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
+
+
+```
+
+
+### Results for day 1
+
+|          Method |     Mean |   Error |  StdDev |
+|---------------- |---------:|--------:|--------:|
+| Benchmark_Part1 | 414.2 μs | 7.33 μs | 6.50 μs |
+| Benchmark_Part2 | 426.5 μs | 6.86 μs | 6.09 μs |
+
+### Results for day 2
+
+|          Method |     Mean |    Error |   StdDev |
+|---------------- |---------:|---------:|---------:|
+| Benchmark_Part1 | 581.7 μs | 11.41 μs | 15.99 μs |
+| Benchmark_Part2 | 596.9 μs | 11.81 μs | 13.61 μs |
+
+### Results for day 3
+
+|          Method |     Mean |    Error |   StdDev |
+|---------------- |---------:|---------:|---------:|
+| Benchmark_Part1 | 635.2 μs | 12.36 μs | 16.50 μs |
+| Benchmark_Part2 | 491.3 μs |  9.50 μs | 10.56 μs |
+
+### Results for day 4
+
+|          Method |     Mean |     Error |    StdDev |
+|---------------- |---------:|----------:|----------:|
+| Benchmark_Part1 | 2.727 ms | 0.0468 ms | 0.0437 ms |
+| Benchmark_Part2 | 2.621 ms | 0.0470 ms | 0.0439 ms |
+
+### Results for day 5
+
+|          Method |     Mean |   Error |  StdDev |
+|---------------- |---------:|--------:|--------:|
+| Benchmark_Part1 | 360.5 μs | 7.05 μs | 8.92 μs |
+| Benchmark_Part2 | 463.5 μs | 7.72 μs | 6.84 μs |
+
+### Results for day 6
+
+|          Method |       Mean |    Error |   StdDev |
+|---------------- |-----------:|---------:|---------:|
+| Benchmark_Part1 |   463.2 μs |  8.73 μs |  9.70 μs |
+| Benchmark_Part2 | 1,563.5 μs | 27.40 μs | 25.63 μs |
+
+
+<!-- end benchmarks -->
+
+
 
 🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄
