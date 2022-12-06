@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 /// This file was generated automatically by a tool.
 /// Test data was automatically downloaded from https://adventofcode.com/
 /// Really! I'm not joking, it's awesome! Try it out!
@@ -78,7 +77,7 @@ public partial class Day2
     [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-2-data.txt" })]
     public void Part2_ShouldReturnValidSolution(string input)
     {
-        
+
 
         string StrategyForMe(string me, string oponent) => oponent switch
         {

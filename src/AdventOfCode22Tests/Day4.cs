@@ -29,7 +29,7 @@ public class Day4
         6-6,4-6
         2-6,4-8
         """)]
-    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData),new object[] {"day-4-data.txt"})]
+    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-4-data.txt" })]
     public void Part1_ShouldReturnValidSolution(string input)
     {
         var solution = input
@@ -51,7 +51,7 @@ public class Day4
         6-6,4-6
         2-6,4-8
         """)]
-    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData),new object[] {"day-4-data.txt"})]
+    [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-4-data.txt" })]
     public void Part2_ShouldReturnValidSolution(string input)
     {
         var solution = input

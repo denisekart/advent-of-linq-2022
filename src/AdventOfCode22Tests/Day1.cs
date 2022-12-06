@@ -33,7 +33,7 @@ public partial class Day1
     [TestCaseSource(typeof(Utilities), nameof(Utilities.LoadTestData), new object[] { "day-1-data.txt" })]
     public void Part1_ShouldReturnGroupWithMaxCaloriesWhenGivenAValidInputString(string input)
     {
-        var maxCalories = 
+        var maxCalories =
             TwoConsecutiveNewLines().Split(input)
             .Select(group => NewLine().Split(group))
             .Select(group => group.Select(item => item.ConvertToInteger()))
