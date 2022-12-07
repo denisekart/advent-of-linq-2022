@@ -120,7 +120,8 @@ public class Day7
             });
 
         var distinctDirs = allDirs
-            .DistinctBy(x => (x.Parent, x.Text));
+            .DistinctBy(x => (x.Parent, x.Text))
+            .ToList();
         var lookup = distinctDirs
             .ToLookup(x => x.Parent);
         foreach ( var dir in distinctDirs)
@@ -128,6 +129,7 @@ public class Day7
             if(dir is not null)
                 dir.Children.AddRange(lookup[dir]);
         }
+
         var rootDir = distinctDirs.Where(x => x.Text == "/").First();
         var totalSum = TotalSum(rootDir);
         var solution = distinctDirs.Where(x => x.Size <= 100_000).Sum(x => x.Size);
