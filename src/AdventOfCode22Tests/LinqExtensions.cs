@@ -59,7 +59,7 @@ public static class LinqExtensions
         var index = 0;
         foreach (var item in sequence)
         {
-            if (splitCondition(item, index))
+            if (splitCondition(item, index++))
             {
                 if (includeSplitItem)
                     items.Add(item);
