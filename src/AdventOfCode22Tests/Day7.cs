@@ -38,7 +38,7 @@ public class Day7
     }
     static int TotalSum(Cmd curr)
     {
-        var childDirs = curr.Children.Where(x => x.IsDir).ToList();
+        var childDirs = curr.Children.Where(x => x.IsDir);
         if (childDirs.Any())
         {
             curr.Size += childDirs.Select(TotalSum).Sum();
@@ -47,9 +47,9 @@ public class Day7
         return curr.Size;
     }
 
-    static IEnumerable<Cmd> FlattenDirs(IEnumerable<Cmd> items)
+    static IEnumerable<Cmd> FlattenDirs(Cmd root)
     {
-        return items.Concat(items.SelectMany(x => FlattenDirs(x.Children.Where(x => x.IsDir))));
+        return root.Flatten(i => i.Children.Where(x => x.IsDir));
     }
 
     [TestCase("""
@@ -90,10 +90,11 @@ public class Day7
                 return line switch
                 {
                     _ when line.StartsWith("$") => new Cmd(line.Substring(2), isCommand: true),
-                    _ when line.StartsWith("dir") => new Cmd(line.Substring(3).Trim(), isDir: true, children: new()), // don't care about this - cd is the one I need
                     _ when char.IsNumber(line[0]) => new Cmd(line.Split(" ")[1], isFile: true, size: int.Parse(line.Split(" ")[0])),
+                    _ => null // don't care about dir - cd is the one I need
                 };
             })
+            .OfType<Cmd>()
             .ForEach(line =>
             {
                 if (line.IsCommand && line.Text.StartsWith("cd")) // don't care about ls
@@ -101,10 +102,13 @@ public class Day7
                     var cmdParam = line.Text.Substring(2).Trim();
 
                     if (cmdParam == "..")
+                    {
                         allDirs.Add(dirStack.Pop());
+                    }
                     else
                     {
-                        var item = new Cmd(cmdParam, isDir: true, children: new(), parent: dirStack.TryPeek(out var p) ? p : null);
+                        var possibleParent = dirStack.TryPeek(out var p) ? p : null;
+                        var item = new Cmd(cmdParam, isDir: true, children: new(), parent: possibleParent);
                         dirStack.Push(item);
                         allDirs.Add(item);
                     }
@@ -219,7 +223,7 @@ public class Day7
 
         var rootDir = distinctDirs.Where(x => x.Text == "/").Single();
         var totalSum = TotalSum(rootDir);
-        var flat = FlattenDirs(new[] { rootDir }).ToList();
+        var flat = FlattenDirs(rootDir).ToList();
 
         var currentSpaceOnDisk = totalSpace - totalSum;
         var solution = flat

@@ -80,9 +80,27 @@ public static class LinqExtensions
     /// </summary>
     public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
     {
-        foreach(var item in enumerable)
+        foreach (var item in enumerable)
         {
             action(item);
+        }
+    }
+
+    /// <summary>
+    /// Tree traversal - non recursive
+    /// </summary>
+    public static IEnumerable<T> Flatten<T>(this T root, Func<T, IEnumerable<T>?> childSelector)
+    {
+        var stack = new Stack<T>();
+        stack.Push(root);
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            yield return current;
+            foreach (var child in childSelector(current) ?? Enumerable.Empty<T>())
+            {
+                stack.Push(child);
+            }
         }
     }
 }
