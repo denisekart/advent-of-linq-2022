@@ -282,13 +282,14 @@ public static class AocTool
             .GetDirectories()
             .First(d => d.Name == "results")
             .EnumerateFiles("*-github.md", SearchOption.TopDirectoryOnly)
-            .OrderBy(x => x.Name)
+            //.OrderBy(x => x.Name)
             .Select(f => new {
                 name= f.Name, 
                 day=int.TryParse(
                     new string(f.Name.Skip(3).TakeWhile(c => char.IsDigit(c)).ToArray()),
                     out var day) ? day : 0, 
                 content=File.ReadAllText(f.FullName) })
+            .OrderBy(x => x.day)
             .ToList();
 
         StringBuilder sb = new StringBuilder();
