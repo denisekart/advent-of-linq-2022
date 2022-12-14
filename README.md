@@ -112,6 +112,7 @@ Assuming you are already logged in using the `dotnet aoc session --set <token>`,
 
 
 
+
 ## Benchmarks
 
 ``` ini
@@ -130,95 +131,103 @@ Intel Core i7-10750H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
 
 |          Method |     Mean |   Error |  StdDev |
 |---------------- |---------:|--------:|--------:|
-| Benchmark_Part1 | 387.6 μs | 6.71 μs | 9.19 μs |
-| Benchmark_Part2 | 417.4 μs | 8.28 μs | 9.86 μs |
+| Benchmark_Part1 | 390.5 μs | 6.00 μs | 5.61 μs |
+| Benchmark_Part2 | 408.1 μs | 7.92 μs | 9.12 μs |
 
 ### Results for day 2
 
-|          Method |     Mean |   Error |   StdDev |
-|---------------- |---------:|--------:|---------:|
-| Benchmark_Part1 | 470.5 μs | 7.37 μs |  6.53 μs |
-| Benchmark_Part2 | 473.6 μs | 9.32 μs | 12.76 μs |
+|          Method |     Mean |    Error |   StdDev |   Median |
+|---------------- |---------:|---------:|---------:|---------:|
+| Benchmark_Part1 | 559.6 μs | 10.83 μs |  9.60 μs | 561.2 μs |
+| Benchmark_Part2 | 632.2 μs | 23.47 μs | 69.21 μs | 592.1 μs |
 
 ### Results for day 3
 
 |          Method |     Mean |    Error |   StdDev |
 |---------------- |---------:|---------:|---------:|
-| Benchmark_Part1 | 513.4 μs | 10.18 μs | 16.73 μs |
-| Benchmark_Part2 | 394.6 μs |  7.56 μs |  8.41 μs |
+| Benchmark_Part1 | 632.9 μs | 12.26 μs | 17.96 μs |
+| Benchmark_Part2 | 477.1 μs |  9.29 μs |  9.54 μs |
 
 ### Results for day 4
 
 |          Method |     Mean |     Error |    StdDev |
 |---------------- |---------:|----------:|----------:|
-| Benchmark_Part1 | 2.144 ms | 0.0197 ms | 0.0153 ms |
-| Benchmark_Part2 | 2.160 ms | 0.0424 ms | 0.0580 ms |
+| Benchmark_Part1 | 2.620 ms | 0.0500 ms | 0.0836 ms |
+| Benchmark_Part2 | 2.511 ms | 0.0501 ms | 0.0794 ms |
 
 ### Results for day 5
 
 |          Method |     Mean |   Error |  StdDev |
 |---------------- |---------:|--------:|--------:|
-| Benchmark_Part1 | 279.4 μs | 3.79 μs | 3.36 μs |
-| Benchmark_Part2 | 372.4 μs | 7.37 μs | 6.89 μs |
+| Benchmark_Part1 | 342.9 μs | 6.02 μs | 6.44 μs |
+| Benchmark_Part2 | 457.2 μs | 7.75 μs | 8.62 μs |
 
 ### Results for day 6
 
 |          Method |       Mean |    Error |   StdDev |
 |---------------- |-----------:|---------:|---------:|
-| Benchmark_Part1 |   374.6 μs |  7.44 μs | 12.22 μs |
-| Benchmark_Part2 | 1,241.9 μs | 24.38 μs | 34.97 μs |
+| Benchmark_Part1 |   443.3 μs |  8.77 μs | 12.86 μs |
+| Benchmark_Part2 | 1,522.2 μs | 29.72 μs | 43.56 μs |
 
 ### Results for day 7
 
 |          Method |     Mean |     Error |    StdDev |
 |---------------- |---------:|----------:|----------:|
-| Benchmark_Part1 | 1.769 ms | 0.0353 ms | 0.0407 ms |
-| Benchmark_Part2 | 2.259 ms | 0.0376 ms | 0.0351 ms |
+| Benchmark_Part1 | 2.134 ms | 0.0422 ms | 0.0578 ms |
+| Benchmark_Part2 | 2.773 ms | 0.0552 ms | 0.1404 ms |
 
 ### Results for day 8
 
-|          Method |     Mean |   Error |  StdDev |   Median |
-|---------------- |---------:|--------:|--------:|---------:|
-| Benchmark_Part1 | 188.4 ms | 3.59 ms | 6.37 ms | 186.4 ms |
-| Benchmark_Part2 | 253.0 ms | 4.75 ms | 8.69 ms | 248.9 ms |
+|          Method |     Mean |   Error |   StdDev |   Median |
+|---------------- |---------:|--------:|---------:|---------:|
+| Benchmark_Part1 | 214.2 ms | 6.41 ms | 18.91 ms | 212.6 ms |
+| Benchmark_Part2 | 279.9 ms | 8.20 ms | 24.19 ms | 273.1 ms |
 
 ### Results for day 9
 
-|          Method |     Mean |    Error |   StdDev |
-|---------------- |---------:|---------:|---------:|
-| Benchmark_Part1 | 10.17 ms | 0.195 ms | 0.173 ms |
-| Benchmark_Part2 | 53.15 ms | 0.748 ms | 1.250 ms |
+|          Method |     Mean |    Error |   StdDev |   Median |
+|---------------- |---------:|---------:|---------:|---------:|
+| Benchmark_Part1 | 11.31 ms | 0.218 ms | 0.441 ms | 11.20 ms |
+| Benchmark_Part2 | 56.51 ms | 1.129 ms | 3.165 ms | 55.42 ms |
 
 ### Results for day 10
 
-|          Method |     Mean |    Error |   StdDev |   Median |
-|---------------- |---------:|---------:|---------:|---------:|
-| Benchmark_Part1 | 139.8 μs |  3.46 μs | 10.19 μs | 138.2 μs |
-| Benchmark_Part2 | 753.9 μs | 16.93 μs | 49.65 μs | 739.0 μs |
+|          Method |     Mean |    Error |   StdDev |
+|---------------- |---------:|---------:|---------:|
+| Benchmark_Part1 | 121.3 μs |  1.94 μs |  1.82 μs |
+| Benchmark_Part2 | 683.8 μs | 13.39 μs | 15.94 μs |
 
 ### Results for day 11
 
 |          Method |         Mean |       Error |      StdDev |
 |---------------- |-------------:|------------:|------------:|
-| Benchmark_Part1 |     122.6 μs |     2.44 μs |     4.34 μs |
-| Benchmark_Part2 | 173,154.8 μs | 3,451.75 μs | 7,720.32 μs |
+| Benchmark_Part1 |     124.5 μs |     2.45 μs |     3.10 μs |
+| Benchmark_Part2 | 175,877.8 μs | 3,472.50 μs | 7,324.69 μs |
 
 ### Results for day 12
 
 |          Method |      Mean |     Error |    StdDev |
 |---------------- |----------:|----------:|----------:|
-| Benchmark_Part1 |  1.063 ms | 0.0210 ms | 0.0352 ms |
-| Benchmark_Part2 | 94.940 ms | 1.8862 ms | 3.0459 ms |
+| Benchmark_Part1 |  1.063 ms | 0.0204 ms | 0.0227 ms |
+| Benchmark_Part2 | 94.325 ms | 1.1673 ms | 0.9747 ms |
 
 ### Results for day 13
 
-|          Method |     Mean |     Error |    StdDev |
-|---------------- |---------:|----------:|----------:|
-| Benchmark_Part1 | 2.726 ms | 0.0537 ms | 0.0596 ms |
-| Benchmark_Part2 | 8.582 ms | 0.1691 ms | 0.2257 ms |
+|          Method |     Mean |     Error |    StdDev |   Median |
+|---------------- |---------:|----------:|----------:|---------:|
+| Benchmark_Part1 | 2.694 ms | 0.0525 ms | 0.0515 ms | 2.697 ms |
+| Benchmark_Part2 | 8.665 ms | 0.1731 ms | 0.3800 ms | 8.510 ms |
+
+### Results for day 14
+
+|          Method |       Mean |     Error |    StdDev |
+|---------------- |-----------:|----------:|----------:|
+| Benchmark_Part1 |   5.141 ms | 0.1015 ms | 0.1456 ms |
+| Benchmark_Part2 | 176.613 ms | 3.4944 ms | 8.0290 ms |
 
 
 <!-- end benchmarks -->
+
 
 
 
