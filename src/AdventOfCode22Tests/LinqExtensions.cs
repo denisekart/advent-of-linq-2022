@@ -1,7 +1,12 @@
-﻿namespace AdventOfCode22Tests;
+﻿using System.Text.RegularExpressions;
 
-public static class LinqExtensions
+namespace AdventOfCode22Tests;
+
+public static partial class LinqExtensions
 {
+    [GeneratedRegex("\\n\\s*\\n\\s*", RegexOptions.CultureInvariant)]
+    private static partial Regex TwoConsecutiveNewLines();
+
     /// <summary>
     /// Converts the input string into an integer or returns the <paramref name="defaultValue"/> if the string cannot be converted
     /// </summary>
@@ -29,6 +34,34 @@ public static class LinqExtensions
 
         return results ?? Enumerable.Empty<string>();
     }
+
+    /// <summary>
+    /// Splits when at least one empty line is between data
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="removeEmptyLines"></param>
+    /// <param name="trim"></param>
+    /// <returns></returns>
+    public static IEnumerable<string> SplitByEmptyLines(this string value, bool removeEmptyLines = false, bool trim = false)
+    {
+        IEnumerable<string> items = TwoConsecutiveNewLines().Split(value);
+        if (removeEmptyLines)
+            items = items.Where(string.IsNullOrWhiteSpace);
+        if (trim)
+            items = items.Select(x => x.Trim());
+
+        return items;
+    }
+
+    /// <summary>
+    /// Splits by at least one whitespace between symbols in a line
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="trim"></param>
+    /// <returns></returns>
+    public static IEnumerable<string> SplitByWhitespace(this string value, bool trim = false)
+        => value?.Split(" ", trim ? StringSplitOptions.TrimEntries : StringSplitOptions.None)
+            ?? Enumerable.Empty<string>();
 
     /// <summary>
     /// Chunks the sequence by a <paramref name="splitCondition"/>.
@@ -78,12 +111,14 @@ public static class LinqExtensions
     /// <summary>
     /// I'm gonna make LINQ work, even if santa thinks I'm a bad boy!
     /// </summary>
-    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+    public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
     {
         foreach (var item in enumerable)
         {
             action(item);
         }
+
+        return enumerable;
     }
 
     /// <summary>
